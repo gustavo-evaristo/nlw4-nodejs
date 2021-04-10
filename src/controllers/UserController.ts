@@ -8,6 +8,10 @@ class UserController {
 
         const { name, email } = req.body
 
+        if (!name || !email){
+            return res.status(400).json({error: 'invalid fields'})
+        }
+
         const userRepository = getCustomRepository(UserRepository)
 
         const userAlreadyExists = await userRepository.findOne({ email })
@@ -21,6 +25,14 @@ class UserController {
         await userRepository.save(user)
 
         return res.status(201).json(user)
+    }
+
+    async show(req: Request, res: Response){
+        const userRepository = getCustomRepository(UserRepository)
+
+        const all = await userRepository.find()
+
+        return res.status(200).json(all)
     }
 
 }
