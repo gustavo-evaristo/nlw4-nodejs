@@ -2,4 +2,4 @@ import express from 'express';
 
 const app = express();
 
-app.listen(3333, () => console.log('server is running'))git add .gitignore
+app.listen(3333, () => console.log('server is running'))
