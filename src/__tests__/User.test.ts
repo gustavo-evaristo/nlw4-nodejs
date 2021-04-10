@@ -2,7 +2,7 @@ import request from 'supertest'
 import { app } from '../app'
 import createConnection from '../database'
 
-describe('Users Test', async () => {
+describe('Users', () => {
   
   beforeAll(async ()=> {
     const connection = await createConnection()
@@ -30,4 +30,14 @@ describe('Users Test', async () => {
     expect(response.status).toBe(400)
 
   })
+
+  it('should be able to list all users', async () => {
+
+    const response = await request(app).get('/users')
+
+    expect(response.status).toBe(200)
+
+  })
+
 })
+
