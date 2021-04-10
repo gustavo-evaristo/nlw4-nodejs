@@ -20,11 +20,22 @@ describe('Surveys', () => {
 
   })
 
+  it('should be able again to create a new survey', async () => {
+
+    const response = await request(app).post('/surveys').send({
+      title: 'Again Survey Example',
+      description: 'Again example survey with jest'
+    })
+
+    expect(response.status).toBe(201)
+
+  })
+
   it('should be able to list all surveys', async () => {
 
     const response = await request(app).get('/surveys')
 
-    expect(response.status).toBe(200)
+    expect(response.body.length).toBe(2)
 
   })
 
