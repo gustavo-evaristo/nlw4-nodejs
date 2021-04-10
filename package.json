@@ -2,9 +2,11 @@
   "name": "nlw4-nodejs",
   "version": "1.0.0",
   "description": "Semana Net Level Week 4 - nodeJs",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node-dev src/server.ts",
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,13 @@
   "bugs": {
     "url": "https://github.com/gustavo-evaristo/nlw4-nodejs/issues"
   },
-  "homepage": "https://github.com/gustavo-evaristo/nlw4-nodejs#readme"
+  "homepage": "https://github.com/gustavo-evaristo/nlw4-nodejs#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.11",
+    "ts-node-dev": "^1.1.6",
+    "typescript": "^4.2.4"
+  }
 }
