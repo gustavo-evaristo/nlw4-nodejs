@@ -1,14 +1,33 @@
-import express from 'express';
-import 'reflect-metadata';
-import createConnection from './database';
-import { router } from './routes';
+/* eslint-disable no-mixed-spaces-and-tabs */
+import express from 'express'
+import 'reflect-metadata'
+import createConnection from './database'
+import { router as routes } from './routes'
 
-createConnection()
+class App {
+  public express: express.Application;
 
-const app = express()
+  public constructor() {
+  	this.express = express()
 
-.use(express.json())
+  	this.middlewares()
 
-.use(router)
+  	this.routes()
 
-export { app }
+  	this.database()
+  }
+
+  private middlewares(): void {
+  	this.express.use(express.json())
+  }
+
+  private routes(): void {
+  	this.express.use(routes)
+  }
+
+  private database(): void {
+  	createConnection()
+  }
+}
+
+export default new App().express

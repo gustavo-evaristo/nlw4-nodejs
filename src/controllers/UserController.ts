@@ -3,38 +3,35 @@ import { getCustomRepository } from 'typeorm'
 import { UserRepository } from '../repositories/UserRepository'
 
 class UserController {
+	async create(req: Request, res: Response): Promise<Response> {
+		const { name, email } = req.body
 
-    async create(req: Request, res: Response){
+		if (!name || !email) {
+			return res.status(400).json({ error: 'invalid fields' })
+		}
 
-        const { name, email } = req.body
+		const userRepository = getCustomRepository(UserRepository)
 
-        if (!name || !email){
-            return res.status(400).json({error: 'invalid fields'})
-        }
+		const userAlreadyExists = await userRepository.findOne({ email })
 
-        const userRepository = getCustomRepository(UserRepository)
+		if (userAlreadyExists) {
+			return res.status(400).json({ error: 'user already exists' })
+		}
 
-        const userAlreadyExists = await userRepository.findOne({ email })
+		const user = userRepository.create({ name, email })
 
-        if (userAlreadyExists) {
-            return res.status(400).json({ error: "user already exists" })
-        }
+		await userRepository.save(user)
 
-        const user = userRepository.create({ name, email })
+		return res.status(201).json(user)
+	}
 
-        await userRepository.save(user)
+	async show(req: Request, res: Response): Promise<Response> {
+		const userRepository = getCustomRepository(UserRepository)
 
-        return res.status(201).json(user)
-    }
+		const all = await userRepository.find()
 
-    async show(req: Request, res: Response){
-        const userRepository = getCustomRepository(UserRepository)
-
-        const all = await userRepository.find()
-
-        return res.status(200).json(all)
-    }
-
+		return res.status(200).json(all)
+	}
 }
 
 export { UserController }
