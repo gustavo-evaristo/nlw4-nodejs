@@ -3,19 +3,22 @@ import { Column, Entity, PrimaryColumn, CreateDateColumn } from 'typeorm'
 
 import { v4 as uuid } from 'uuid'
 
-@Entity('survey')
-class Surveys {
+@Entity('surveysUsers')
+class SurveysUsers {
   @PrimaryColumn()
-  readonly id: string;
+  readonly id: string
 
   @Column()
-  title: string;
+  user_id: string
 
   @Column()
-  description: string;
+  survey_id: string
+
+  @Column()
+  value: number
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at: Date
 
   constructor() {
   	if (!this.id) {
@@ -24,4 +27,4 @@ class Surveys {
   }
 }
 
-export { Surveys }
+export { SurveysUsers }

@@ -3,11 +3,11 @@
 /* eslint-disable linebreak-style */
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
-export class CreateUsers1618075655700 implements MigrationInterface {
+export class survey1618254055674 implements MigrationInterface {
 	public async up(queryRunner: QueryRunner): Promise<void> {
 		await queryRunner.createTable(
 			new Table({
-				name: 'users',
+				name: 'survey',
 
 				columns: [
 					{
@@ -17,18 +17,18 @@ export class CreateUsers1618075655700 implements MigrationInterface {
 					},
 
 					{
-						name: 'name',
+						name: 'title',
 						type: 'varchar',
 					},
 
 					{
-						name: 'email',
+						name: 'description',
 						type: 'varchar',
 					},
 
 					{
 						name: 'created_at',
-						type: 'timestamp',
+						type: 'timestamps',
 						default: 'now()',
 					},
 				],
@@ -37,6 +37,6 @@ export class CreateUsers1618075655700 implements MigrationInterface {
 	}
 
 	public async down(queryRunner: QueryRunner): Promise<void> {
-		await queryRunner.dropTable('users')
+		await queryRunner.dropTable('survey')
 	}
 }
