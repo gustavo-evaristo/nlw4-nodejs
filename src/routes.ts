@@ -1,22 +1,16 @@
 import { Router } from 'express'
-import { SurveysController } from './controllers/SurveysController'
-import { UserController } from './controllers/UserController'
-import { SendMailController } from './controllers/SendMailController'
+import SurveysController from './controllers/SurveysController'
+import UserController from './controllers/UserController'
+import SendMailController from './controllers/SendMailController'
 
 const router = Router() 
 
-const userController = new UserController()
+router.post('/users', UserController.create)
+router.get('/users', UserController.show)
 
-const surveysController = new SurveysController()
+router.post('/surveys', SurveysController.create)
+router.get('/surveys', SurveysController.show)
 
-const sendMailController = new SendMailController()
-
-router.post('/users', userController.create)
-router.get('/users', userController.show)
-
-router.post('/surveys', surveysController.create)
-router.get('/surveys', surveysController.show)
-
-router.post('/sendmail', sendMailController.execute)
+router.post('/sendmail', SendMailController.execute)
 
 export { router }
